@@ -8,24 +8,28 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 20,
+        elevation: 100,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: const BorderSide(color: Colors.black, width: 4)),
         surfaceTintColor: Colors.pink.shade500,
+        shadowColor: Colors.black,
         // scrolledUnderElevation: 20,
         backgroundColor: Colors.amber.shade300,
         foregroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.green, size: 30),
-        actionsIconTheme: IconThemeData(color: Colors.red, size: 20),
-        leading: Icon(Icons.arrow_back),
+        iconTheme: const IconThemeData(color: Colors.green, size: 30),
+        actionsIconTheme: const IconThemeData(color: Colors.red, size: 20),
+        leading: Container(),
         title: Row(
           children: [
-            Icon(Icons.person),
+            const Icon(Icons.person),
             Text(
               title,
             )
           ],
         ),
         centerTitle: true,
-        actions: const[
+        actions: const [
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Icon(Icons.notification_important),
