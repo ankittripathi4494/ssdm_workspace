@@ -9,6 +9,10 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 100,
+        flexibleSpace: Container(decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0),
+          gradient: LinearGradient(colors: [Colors.deepOrange, Colors.white])
+        ),),
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side: const BorderSide(color: Colors.black, width: 4)),
@@ -40,10 +44,16 @@ class SplashScreen extends StatelessWidget {
           )
         ],
       ),
-      body: ListView.builder(
-        itemCount: 100,
-        itemBuilder: (context, index) => ListTile(
-          title: Text("Item $index"),
+      body: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0),
+          gradient: LinearGradient(colors: [Colors.deepOrange, Colors.white])
+        ),
+        child: ListView.builder(
+          itemCount: 100,
+          itemBuilder: (context, index) => ListTile(
+            title: Text("Item $index"),
+          ),
         ),
       ),
     );
