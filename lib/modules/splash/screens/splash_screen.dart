@@ -1,59 +1,50 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: avoid_print
 
-class SplashScreen extends StatelessWidget {
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:ssdm/modules/dashboard/screens/dashboard_screen.dart';
+
+class SplashScreen extends StatefulWidget {
   final String title;
   const SplashScreen({super.key, required this.title});
 
   @override
+  State<SplashScreen> createState() => StateofSplashScreen();
+}
+
+class StateofSplashScreen extends State<SplashScreen> {
+  bool showProgress = true;
+  @override
+  void initState() {
+    Timer(const Duration(seconds: 2), () {
+      print("Do the task");
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const DashboardScreen(title: "Dashboard"),
+          ));
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 100,
-        flexibleSpace: Container(decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(0),
-          gradient: LinearGradient(colors: [Colors.deepOrange, Colors.white])
-        ),),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-            side: const BorderSide(color: Colors.black, width: 4)),
-        surfaceTintColor: Colors.pink.shade500,
-        shadowColor: Colors.black,
-        // scrolledUnderElevation: 20,
-        backgroundColor: Colors.amber.shade300,
-        foregroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.green, size: 30),
-        actionsIconTheme: const IconThemeData(color: Colors.red, size: 20),
-        leading: Container(),
-        title: Row(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Icon(Icons.person),
-            Text(
-              title,
+            const FlutterLogo(
+              size: 200,
+            ),
+            Visibility(
+              visible: showProgress,
+              replacement: Container(),
+              child: const CircularProgressIndicator(),
             )
           ],
-        ),
-        centerTitle: true,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(Icons.notification_important),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(Icons.logout),
-          )
-        ],
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(0),
-          gradient: LinearGradient(colors: [Colors.deepOrange, Colors.white])
-        ),
-        child: ListView.builder(
-          itemCount: 100,
-          itemBuilder: (context, index) => ListTile(
-            title: Text("Item $index"),
-          ),
         ),
       ),
     );
