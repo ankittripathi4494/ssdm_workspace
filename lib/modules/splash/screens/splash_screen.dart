@@ -3,7 +3,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ssdm/modules/dashboard/screens/dashboard_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   final String title;
@@ -19,11 +18,9 @@ class StateofSplashScreen extends State<SplashScreen> {
   void initState() {
     Timer(const Duration(seconds: 2), () {
       print("Do the task");
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const DashboardScreen(title: "Dashboard"),
-          ));
+      Navigator.pushNamed(context, '/dashboard',arguments: {
+        "data":"Ankit Tri"
+      });
     });
     super.initState();
   }

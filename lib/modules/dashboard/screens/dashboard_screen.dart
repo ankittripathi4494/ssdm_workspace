@@ -1,9 +1,16 @@
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable, unrelated_type_equality_checks, avoid_print
+
+
 import 'package:flutter/material.dart';
 import 'package:ssdm/global_widget/custom_drawer.dart';
+import 'package:ssdm/modules/notifications/screens/notification_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
-  final String title;
-  const DashboardScreen({super.key, required this.title});
+  late String title;
+  late Map<String, String> arguments;
+  DashboardScreen(this.title, [Map<String, String>? arguments]) {
+    this.arguments = arguments ?? {};
+  }
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();
@@ -36,17 +43,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
           children: [
             const Icon(Icons.person),
             Text(
-              widget.title,
+              widget.arguments["data"]!,
             )
           ],
         ),
         centerTitle: true,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(Icons.notification_important),
+        actions: [
+          InkWell(
+            onTap: () async {
+              var result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const NotificationScreen(title: 'Notifications'),
+                  ));
+
+                  print("The result Type :- ${result.runtimeType}");
+                   print("Result :- ${result.toString()}");
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.notification_important),
+            ),
           ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(8.0),
             child: Icon(Icons.logout),
           )
@@ -59,13 +79,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
             gradient: const LinearGradient(
                 colors: [Colors.deepOrange, Colors.white])),
         child: ListView.builder(
-          itemCount: 100,
+          itemCount: (widget.arguments['data'] == "data") ? 200 : 100,
           itemBuilder: (context, index) => ListTile(
             title: Text("Item $index"),
           ),
         ),
       ),
     );
-  
   }
 }
