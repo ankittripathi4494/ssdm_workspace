@@ -2,16 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ssdm/global_widget/custom_bottom_nav_bar.dart';
 
-class NotificationScreen extends StatefulWidget {
+class PageErrorScreen extends StatefulWidget {
   final String title;
-  const NotificationScreen({super.key, required this.title});
+  const PageErrorScreen({super.key, required this.title});
 
   @override
-  State<NotificationScreen> createState() => _NotificationScreenState();
+  State<PageErrorScreen> createState() => _PageErrorScreenState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> {
-  int currentIndex = 2;
+class _PageErrorScreenState extends State<PageErrorScreen> {
+  int currentIndex = 3;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,16 +33,17 @@ class _NotificationScreenState extends State<NotificationScreen> {
         foregroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.green, size: 30),
         actionsIconTheme: const IconThemeData(color: Colors.red, size: 20),
-
+    
         title: Text(
           widget.title,
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text("Page : ${widget.title}"),
+      body: const Center(
+        child: Text("Error Page"),
       ),
-     bottomNavigationBar: CustomBottomNav(currentIndex: currentIndex),
+      bottomNavigationBar: CustomBottomNav(currentIndex: currentIndex),
     );
   }
 }
+

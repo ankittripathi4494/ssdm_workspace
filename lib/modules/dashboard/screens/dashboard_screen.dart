@@ -1,7 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors, must_be_immutable, unrelated_type_equality_checks, avoid_print
 
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ssdm/global_widget/custom_bottom_nav_bar.dart';
 import 'package:ssdm/global_widget/custom_drawer.dart';
 import 'package:ssdm/modules/notifications/screens/notification_screen.dart';
 
@@ -17,6 +18,8 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  int currentIndex = 0;
+  bool showExtendedFAB = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,8 +61,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         const NotificationScreen(title: 'Notifications'),
                   ));
 
-                  print("The result Type :- ${result.runtimeType}");
-                   print("Result :- ${result.toString()}");
+              print("The result Type :- ${result.runtimeType}");
+              print("Result :- ${result.toString()}");
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),
@@ -85,6 +88,49 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: (showExtendedFAB == false)
+          ? FloatingActionButton.extended(
+              onPressed: () {
+                setState(() {
+                  showExtendedFAB=true;
+                });
+              },
+              icon: const Icon(Icons.chat),
+              tooltip: "Chatr",
+              label: const Text("Chat Message"),
+            )
+          : Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    
+                  },
+                  child: const Icon(Icons.phone),
+                 
+                ),
+                SizedBox(height: 10,),
+                FloatingActionButton(
+                  onPressed: () {},
+                  child: const Icon(Icons.message),
+                 
+                ),
+                 SizedBox(height: 10,),
+                FloatingActionButton(
+                  onPressed: () {
+                     setState(() {
+                  showExtendedFAB=false;
+                });
+                  },
+                  child: const Icon(Icons.cancel_rounded),
+                 
+                ),
+              ],
+            ),
+      bottomNavigationBar: CustomBottomNav(currentIndex: currentIndex),
     );
   }
 }
