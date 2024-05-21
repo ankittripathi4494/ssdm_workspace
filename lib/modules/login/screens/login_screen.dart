@@ -9,11 +9,14 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => StateofLoginScreen();
 }
 
-class StateofLoginScreen extends State<LoginScreen> {
+class StateofLoginScreen extends State<LoginScreen>
+    with TickerProviderStateMixin {
   int currentIndex = 1;
+  late TabController tabController;
+  String title = "List View";
   @override
   void initState() {
-    // TODO: implement initState
+   tabChanger();
     super.initState();
   }
 
@@ -21,6 +24,21 @@ class StateofLoginScreen extends State<LoginScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+  }
+
+  tabChanger(){
+     tabController = TabController(length: 2, vsync: this);
+    tabController.addListener((){
+     if ( tabController.index==0) {
+       setState(() {
+      title = "List View";
+       });
+     } else {
+       setState(() {
+      title = "Grid View";
+       });
+     }
+    });
   }
 
   @override
@@ -45,12 +63,54 @@ class StateofLoginScreen extends State<LoginScreen> {
         iconTheme: const IconThemeData(color: Colors.green, size: 30),
         actionsIconTheme: const IconThemeData(color: Colors.red, size: 20),
 
+        title:  Text(title),
         centerTitle: true,
+        bottom:
+            TabBar(isScrollable: false, controller: tabController, tabs: const [
+          Tab(
+            text: "List View",
+            icon: Icon(Icons.list),
+          ),
+          Tab(
+            text: "Grid View",
+            icon: Icon(Icons.grid_3x3),
+          ),
+        ]),
       ),
-      body: const Center(
-        child: Text("Login Page"),
+      body:
+          TabBarView(controller: tabController, children: [tabOne(), tabTwo()]),
+      bottomNavigationBar: CustomBottomNav(currentIndex: currentIndex),
+    );
+  }
+
+  Widget tabOne() {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0),
+          gradient:
+              const LinearGradient(colors: [Colors.deepOrange, Colors.white])),
+      child: ListView.builder(
+        itemCount: 100,
+        itemBuilder: (context, index) => ListTile(
+          title: Text("Item $index"),
+        ),
       ),
-     bottomNavigationBar: CustomBottomNav(currentIndex: currentIndex),
+    );
+  }
+
+  Widget tabTwo() {
+    return Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0),
+          gradient:
+              const LinearGradient(colors: [Colors.deepOrange, Colors.white])),
+      child: GridView.builder(
+        itemCount: 100,
+        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5,),
+        itemBuilder: (context, index) => ListTile(
+          title: Text("Item $index"),
+        ),
+      ),
     );
   }
 }
