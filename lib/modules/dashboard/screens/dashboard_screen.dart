@@ -115,6 +115,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
           child: ListView.builder(
             itemCount: (widget.arguments['data'] == "data") ? 200 : 100,
             itemBuilder: (context, index) => ListTile(
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  backgroundColor: (index % 2 == 0) ? Colors.green : Colors.red,
+                  margin: const EdgeInsets.all(10),
+                  behavior: SnackBarBehavior.floating,
+                  duration: Durations.medium3,
+                  content: Text(
+                    "This is Item $index",
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  action: SnackBarAction(
+                    label: "Dismiss",
+                    textColor: Colors.white,
+                    backgroundColor: Colors.deepPurple,
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).clearSnackBars();
+                    },
+                  ),
+                ));
+              },
+              leading: (index % 2 == 0)
+                  ? Image.asset("resources/images/output-onlinegiftools-3.gif")
+                  : Image.asset("resources/images/output-onlinegiftools.gif"),
               title: Text("Item $index"),
             ),
           ),

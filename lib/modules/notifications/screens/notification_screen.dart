@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ssdm/global_widget/custom_bottom_nav_bar.dart';
 
@@ -40,7 +39,41 @@ class _NotificationScreenState extends State<NotificationScreen> {
         centerTitle: true,
       ),
       body: Center(
-        child: Text("Page : ${widget.title}"),
+        child: InkWell(
+          
+          onTap:() {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  backgroundColor: Colors.red,
+                  margin: const EdgeInsets.all(10),
+                  behavior: SnackBarBehavior.floating,
+                  duration: Durations.medium3,
+                  // ignore: prefer_const_constructors
+                  content: Text(
+                    "Clicked on Snackbar",
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  action: SnackBarAction(
+                    label: "Dismiss",
+                    textColor: Colors.white,
+                    backgroundColor: Colors.deepPurple,
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).clearSnackBars();
+                    },
+                  ),
+                ));
+        }, child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.red,
+                  image: const DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage("resources/images/logo.png"))),
+              child: const SizedBox(
+                width: 200,
+                height: 200,
+              ),
+            ),),
       ),
      bottomNavigationBar: CustomBottomNav(currentIndex: currentIndex),
     );

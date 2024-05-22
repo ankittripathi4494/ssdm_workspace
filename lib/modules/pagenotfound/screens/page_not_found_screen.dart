@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ssdm/global_widget/custom_bottom_nav_bar.dart';
 
@@ -33,17 +32,25 @@ class _PageErrorScreenState extends State<PageErrorScreen> {
         foregroundColor: Colors.white,
         iconTheme: const IconThemeData(color: Colors.green, size: 30),
         actionsIconTheme: const IconThemeData(color: Colors.red, size: 20),
-    
+
         title: Text(
           widget.title,
         ),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text("Error Page"),
+      body: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(0),
+            color: Colors.red,
+            image: const DecorationImage(
+                fit: BoxFit.fill,
+                image: NetworkImage(
+                    "https://images.freeimages.com/image/previews/539/nature-tree-pack-5691310.jpg"))),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: Image.network("https://images.freeimages.com/image/previews/539/nature-tree-pack-5691310.jpg", width: 200, height: 200,),
       ),
       bottomNavigationBar: CustomBottomNav(currentIndex: currentIndex),
     );
   }
 }
-

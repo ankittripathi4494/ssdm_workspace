@@ -18,9 +18,8 @@ class StateofSplashScreen extends State<SplashScreen> {
   void initState() {
     Timer(const Duration(seconds: 2), () {
       print("Do the task");
-      Navigator.pushNamed(context, '/dashboard',arguments: {
-        "data":"Ankit Tri"
-      });
+      Navigator.pushNamed(context, '/dashboard',
+          arguments: {"data": "Ankit Tri"});
     });
     super.initState();
   }
@@ -33,8 +32,17 @@ class StateofSplashScreen extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const FlutterLogo(
-              size: 200,
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.red,
+                  image: const DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage("resources/images/logo.png"))),
+              child: const SizedBox(
+                width: 200,
+                height: 200,
+              ),
             ),
             Visibility(
               visible: showProgress,

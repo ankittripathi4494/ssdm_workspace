@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ssdm/global_widget/custom_bottom_nav_bar.dart';
 
@@ -106,7 +105,7 @@ class StateofLoginScreen extends State<LoginScreen>
               const LinearGradient(colors: [Colors.deepOrange, Colors.white])),
       child: GridView.builder(
         itemCount: 100,
-        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5,),
+        gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 5,),
         itemBuilder: (context, index) => ListTile(
           title: Text("Item $index"),
         ),
